@@ -104,7 +104,9 @@
   <body>
     <div id="container">
     <h1>?Who Chat ☻ </h1>
-    <ul id="messages"></ul>
+    <ul id="messages">
+      <li class="online"><div class="fb-like" data-href="https://sivsivsree.herokuapp.com/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div></li>
+    </ul>
       <div id="userInput">
       <form action="" class="c">
         <input id="m" autocomplete="off" placeholder="Type and press Enter! Say Something to someone 3:)"/>
@@ -164,7 +166,7 @@
         }
      }
      function showAbout(){
-      var html = " <h1>Welcome to ?Who-chat!</h1> <h3>What is this?</h3> <p>Let me tell you the truth, I was bored and I wanted to do something! So I made this chat application. Which I named whoChat! Pretty good nah! :P (i know)</p><br><br> <h3>Why whoChat?</h3> <p>Fun! I guess! You can chat in here what you like, there is no details about you! No Gender, No Age Limit , No Nothing only thing is each person is assigned with a unique color in messages! Thats it start saying some gibberish to 'somebody' </p> <br><br> <div><div class='fb-like' data-href='https://sivsivsree.herokuapp.com/' data-layout='standard' data-action='like' data-show-faces='true' data-share='true'></div></div><br><br><h4>I <a href='http://fb.me/sivsivsree' target='_blank'><big>Siv.S,</big></a> made this application using #Javascript, #Node.js and #Socket.io - hosted in herouku!</h4> <br><br> <small>by clicking <b>Let's Chat </b> button you are on your own! </small> <br></br> <div style='text-align:center;'><button class='i-know' onClick='dismiss()'>Let's Chat</button></div> ";
+      var html = " <h1>Welcome to ?Who-chat!</h1> <h3>What is this?</h3> <p>Let me tell you the truth, I was bored and I wanted to do something! So I made this chat application. Which I named whoChat! Pretty good nah! :P (i know)</p><br><br> <h3>Why whoChat?</h3> <p>Fun! I guess! You can chat in here what you like, there is no details about you! No Gender, No Age Limit , No Nothing only thing is each person is assigned with a unique color in messages! Thats it start saying some gibberish to 'somebody' </p> <br><br> <div><div class='fb-like' data-href='https://sivsivsree.herokuapp.com/' data-layout='button_count' data-action='like' data-show-faces='true' data-share='true'></div></div><br><br><h4>I <a href='http://fb.me/sivsivsree' target='_blank'><big>Siv.S,</big></a> made this application using #Javascript, #Node.js and #Socket.io - hosted in herouku!</h4> <br><br> <small>by clicking <b>Let's Chat </b> button you are on your own! </small> <br></br> <div style='text-align:center;'><button class='i-know' onClick='dismiss()'>Let's Chat</button></div> ";
 
       var div = $("<div>").attr("id","xky").css({"width": "100%", "height": "1000%", "z-index": 1000, "background": "rgba(221, 221, 221, 0.88)", "position":"absolute", "top":0, "left": 0});
       var modal = $("<div>").addClass("modal").html(html);
