@@ -6,9 +6,6 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/socket', function(req, res){
-  res.sendFile(__dirname + '/socket.js');
-});
 
 app.get('/jq', function(req, res){
   res.sendFile(__dirname + '/jq.js');
