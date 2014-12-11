@@ -69,6 +69,27 @@
         color:#fff;
       }
 
+      .modal{
+        width: 40%;
+        margin: 5em auto;
+        border: 1px solid #ddd;
+        background: #fff;
+        padding: 5em;
+      }
+ 
+     .i-know{
+      border: 1px solid rgba(90, 224, 249, 0.66);
+      padding: .4em 2em;
+      font-size: 1.5em;
+      cursor: pointer;
+      margin: auto auto;
+      vertical-align: middle;
+      background: rgba(67, 195, 211, 0.72);
+      color: #fff;
+     }
+     .i-know:hover {
+      background: rgba(67, 195, 211, 0.82);
+     }
     </style>
   </head>
   <body>
@@ -86,7 +107,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
     <script>
 
-
+       var socket = io();
 
       function getRandomColor() {
           var letters = '0123456789ABCDEF'.split('');
@@ -119,7 +140,22 @@
            return id;
        }
      }
+     function dismiss(){
+        localStorage.setItem("siv", "read");
+        if(localStorage.siv){
+         $("#xky").remove();
+        }
+     }
+     function showAbout(){
+      var html = " <h1>Welcome to ?Who-chat!</h1> <h3>What is this?</h3> <p>Let me tell you the truth, I was bored and I wanted to do something! So I made this chat application. Which I named whoChat! Pretty good nah! :P (i know)</p><br><br> <h3>Why whoChat?</h3> <p>Fun! I guess! You can chat in here what you like, there is no details about you! No Gender, No Age Limit , No Nothing</p> <br><br> <h4>I <a href='http://fb.me/sivsivsree' target='_blank'><big>Siv.S,</big></a> made this application using #Javascript, #Node.js and #Socket.io - hosted in herouku!</h4> <br><br> <small>by clicking <b>Let's Chat </b> button you are on your own! </small> <br></br> <div style='text-align:center;'><button class='i-know' onClick='dismiss()'>Let's Chat</button></div> ";
 
+      var div = $("<div>").attr("id","xky").css({"width": "100%", "height": "100%", "z-index": 1000, "background": "rgba(221, 221, 221, 0.88)", "position":"absolute", "top":0, "left": 0});
+      var modal = $("<div>").addClass("modal").html(html);
+      div.append(modal);
+      $("body").append(div);
+
+
+     }
      function set(){
           color = getRandomColor();
           generator    = new IDGenerator();
@@ -131,10 +167,13 @@
      }
 
       $(document).ready(function(){
-         var socket = io();
+        
 
         var color = "", id = false;
         if(localStorage){
+           if(!localStorage.siv){
+               showAbout();
+           }
 
            if(localStorage.whoChat){
                var whoChat = JSON.parse(localStorage.whoChat);
