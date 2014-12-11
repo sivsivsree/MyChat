@@ -41,6 +41,12 @@
         background: rgba(221, 221, 221, 0.88);
 
       }
+      .online{
+        text-align: center;
+        display: inline;
+        font-size: 1em !important;
+      }
+
       h1,.c{text-align: center;}
       #messages { list-style-type: none; margin: 0; padding: 0; }
       #messages li { padding: 5px 10px; font-size: 1.5em; border-color: #fff; }
@@ -111,26 +117,38 @@
        }
      }
 
+     function set(){
+          color = getRandomColor();
+          generator    = new IDGenerator();
+          id = generator.generate()
+
+          var testObject = { color: color, id: id };
+          localStorage.setItem('whoChat', JSON.stringify(testObject));
+     }
 
       $(document).ready(function(){
 
         var color = "", id = false;
         if(localStorage){
-          
-           if(localStorage.whoChat){
 
+           if(localStorage.whoChat){
                var whoChat = JSON.parse(localStorage.whoChat);
-               color = whoChat.color;
-               id = whoChat._id;
+                if(whoChat.id){
+                    color = whoChat.color;
+
+                    id = whoChat.id;                  
+                }else{
+                 set();
+
+               }
+
 
            }else{
-              color = getRandomColor();
-              generator    = new IDGenerator();
-              id = generator.generate()
-
-              var testObject = { color: color, _id: id };
-              localStorage.setItem('whoChat', JSON.stringify(testObject));
+              set();
            }
+
+        }else{
+          document.body.innerHTML = "Use latest Browser! :(";
         }
 
         var max = ($(document).height() - 20);

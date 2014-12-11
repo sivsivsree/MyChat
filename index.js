@@ -19,7 +19,7 @@ io.on('connection', function(socket){
 
   socket.on("join", function(id){
     console.log(users.indexOf(id));
-  	if(users.indexOf(id) == -1){
+  	if(users.indexOf(id) == -1 && id !== false){
 
   		userCount = users.push(id);
 	    io.emit('online', users.length  );
