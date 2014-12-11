@@ -43,7 +43,7 @@
       }
       .online{
         text-align: center;
-        display: inline;
+        display: inline-block;
         font-size: 1em !important;
       }
 
@@ -124,9 +124,11 @@
 
           var testObject = { color: color, id: id };
           localStorage.setItem('whoChat', JSON.stringify(testObject));
+          socket.emit("join", id);
      }
 
       $(document).ready(function(){
+         var socket = io();
 
         var color = "", id = false;
         if(localStorage){
@@ -136,7 +138,8 @@
                 if(whoChat.id){
                     color = whoChat.color;
 
-                    id = whoChat.id;                  
+                    id = whoChat.id; 
+                    socket.emit("join", id);                 
                 }else{
                  set();
 
@@ -153,9 +156,8 @@
 
         var max = ($(document).height() - 20);
         $("#container").css("max-height", max);
-        var socket = io();
 
-        socket.emit("join", id);
+
 
 
         $('form').submit(function(){
