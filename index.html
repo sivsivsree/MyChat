@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+  <head>
+    <title>?Who-Chat</title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:100,300' rel='stylesheet' type='text/css'>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box;  font-family: 'Roboto', sans-serif; font-weight: 300;}
+      #container{max-width:800px; margin:auto auto;}
+      body { font-size: 14px; background: #eee; }
+      form{
+        width: 60%;
+        margin: auto; 
+        margin-top: 40px;      
+      }
+
+      @media(max-width: 500px){
+        form{
+          width: 100%;
+          margin: auto;        
+        }
+
+        #container{max-width:100%; margin:auto auto; height:80vh;}
+      }
+      #m{
+          width: 100%;
+          margin: auto auto;
+          font-size: 1.3em;
+          padding: .2em .8em;
+          margin-bottom: 5px;
+          border: 1px solid #fff;
+          border-radius: 5px;
+          outline: none;
+      }
+      #userInput{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        padding: 0 10px;
+        margin: auto;
+        width: 100%;
+        background: rgba(221, 221, 221, 0.88);
+
+      }
+      h1,.c{text-align: center;}
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; font-size: 1.5em; border-color: #fff; }
+      .chat-bubble {
+        display: inline-block;
+        background: #fff;
+        padding: 3px 20px;
+        border-radius: 7px;
+      }
+
+      a{
+        text-decoration: none;
+        color:#000;
+        font-weight: bolder;
+      }
+      a:hover{
+        color:#fff;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="container">
+    <h1>?Who Chat ☻ </h1>
+    <ul id="messages"></ul>
+      <div id="userInput">
+      <form action="" class="c">
+        <input id="m" autocomplete="off" placeholder="Type and press Enter"/>
+        <small> Developed With <span style="font-size:1.4em; color:rgba(253, 10, 10, 0.63)">♥</span> and care - <a href="http://fb.me/sivsivsree"></small><strong>Siv.S</strong></a>
+      </form>
+      </div>
+    </div>
+    <script src="socket"></script>
+    <script src="jq"></script>
+    <script>
+
+      function getRandomColor() {
+          var letters = '0123456789ABCDEF'.split('');
+          var color = '#';
+          for (var i = 0; i < 6; i++ ) {
+              color += letters[Math.floor(Math.random() * 16)];
+          }
+          return color;
+      }
+
+      var max = ($(document).height() - 20);
+      $("#container").css("max-height", max);
+      var socket = io();
+
+
+      $('form').submit(function(){
+        socket.emit('chat message', $('#m').val());
+        $('#m').val('');
+        return false;
+      });
+
+
+      socket.on('chat message', function(msg){
+        var li = $("<li>").append($("<div>").attr({"class": "chat-bubble"}).text(msg));
+        $('#messages').prepend(li);
+        //li.css({"color": getRandomColor()});
+      });
+    </script>
+  </body>
+</html>
