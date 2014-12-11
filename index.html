@@ -77,6 +77,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
     <script>
 
+
+
       function getRandomColor() {
           var letters = '0123456789ABCDEF'.split('');
           var color = '#';
@@ -86,23 +88,46 @@
           return color;
       }
 
-      var max = ($(document).height() - 20);
-      $("#container").css("max-height", max);
-      var socket = io();
+      $(document).ready(function(){
+        var color = "";
+        if(localStorage){
+           if(localStorage.whoChat){
+
+               var whoChat = JSON.parse(localStorage.whoChat);
+               color = whoChat.color;
+
+           }else{
+              color = getRandomColor();
+              var testObject = { color: color };
+              localStorage.setItem('whoChat', JSON.stringify(testObject));
+           }
+        }
+
+        var max = ($(document).height() - 20);
+        $("#container").css("max-height", max);
+        var socket = io();
 
 
-      $('form').submit(function(){
-        socket.emit('chat message', $('#m').val());
-        $('#m').val('');
-        return false;
+        $('form').submit(function(){
+            var value = {color: color, msg: $('#m').val()};
+
+          socket.emit('chat message', JSON.stringify(value));
+          $('#m').val('');
+          return false;
+        });
+
+
+        socket.on('chat message', function(data){
+          data = JSON.parse(data);
+
+          var li = $("<li>").append($("<div>").attr({"class": "chat-bubble"}).css("color",data.color).text(data.msg));
+          $('#messages').prepend(li);
+          //li.css({"color": getRandomColor()});
+        });
+
+
       });
 
-
-      socket.on('chat message', function(msg){
-        var li = $("<li>").append($("<div>").attr({"class": "chat-bubble"}).text(msg));
-        $('#messages').prepend(li);
-        //li.css({"color": getRandomColor()});
-      });
     </script>
   </body>
 </html>
