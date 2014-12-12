@@ -16,11 +16,13 @@ app.get('/jq', function(req, res){
 io.on('connection', function(socket){
 
 
-      
+      userCount  = io.sockets.sockets.length;
 
   socket.on("join", function(id){
 
+
 	   io.emit('online', io.sockets.sockets.length  );
+	   userCount  = io.sockets.sockets.length;
 	   console.log(io.sockets.sockets.length + " CONNECTED USERS ");
 
   });
@@ -34,6 +36,7 @@ io.on('connection', function(socket){
   socket.on('disconnect', function(socket) {
 
         io.emit('online', io.sockets.sockets.length  );
+        userCount  = io.sockets.sockets.length;
 	   console.log(io.sockets.sockets.length + " CONNECTED USERS REMAINING");
 
    })
