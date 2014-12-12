@@ -223,7 +223,7 @@
 
 
         $('form').submit(function(){
-            var value = {color: color, msg:"name: " + $('#m').val()};
+            var value = {color: color, msg: $('#m').val()};
 
           socket.emit('chat message', JSON.stringify(value));
           $('#m').val('');
