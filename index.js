@@ -8,6 +8,10 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/ring', function(req, res){
+  res.sendFile(__dirname + '/ding.mp3');
+  console.log(req);
+});
 
 app.get('/jq', function(req, res){
   res.sendFile(__dirname + '/jq.js');
