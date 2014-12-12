@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>?WhoChat! Chat Anonymously - Siv</title>
+    <title>?WhoChatz! Chat On the go - Siv</title>
     <link href='//fonts.googleapis.com/css?family=Roboto:100,300' rel='stylesheet' type='text/css'>
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box;  font-family: 'Roboto', sans-serif; font-weight: 300;}
@@ -108,7 +108,7 @@
   </head>
   <body>
     <div id="container">
-    <h1>?Who Chat ☻ </h1>
+    <h1>?Who Chatz ☻ </h1>
     <ul id="messages">
       <li class="online"><div class="fb-like" data-href="https://sivsivsree.herokuapp.com/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div></li>
     </ul>
@@ -186,7 +186,7 @@
         } 
      }
      function showAbout(){
-      var html = " <h1>Welcome to ?Who-chat!</h1> <h3>What is this?</h3> <p>Let me tell you the truth, I was bored and I wanted to do something! So I made this chat application. Which I named whoChat! Pretty good nah! :P (i know)</p><br><br> <h3>Why whoChat?</h3> <p>Fun! I guess! You can chat in here what you like, there is no details about you! No Gender, No Age Limit , No Nothing only thing is each person is assigned with a unique color in messages! and a nickname you prefer! Thats it start saying some gibberish to 'somebody' </p> <br><br> <div><div class='fb-like' data-href='https://sivsivsree.herokuapp.com/' data-layout='button_count' data-action='like' data-show-faces='true' data-share='true'></div></div><br><br><h4>I <a href='http://fb.me/sivsivsree' target='_blank'><big>Siv.S,</big></a> made this application using #Javascript, #Node.js and #Socket.io - hosted in herouku!</h4> <br><br> <small>by clicking <b>Let's Chat </b> button you are on your own! </small> <br></br> <div style='text-align:center;'><input type='text' placeholder='Enter a Nickname' id='nickname' autocomplete='off'> <button class='i-know' onClick='dismiss()'>Let's Chat</button></div> ";
+      var html = " <h1>Welcome to ?Who-chatz!</h1> <h3>What is this?</h3> <p>Let me tell you the truth, I was bored and I wanted to do something! So I made this chat application. Which I named whoChatz! Pretty good nah! :P (i know)</p><br><br> <h3>Why whoChat?</h3> <p>Fun! I guess! You can chat in here what you like, there is no details about you! No Gender, No Age Limit , No Nothing only thing is each person is assigned with a unique color in messages! and a nickname you prefer! Thats it start saying some gibberish to 'somebody' </p> <br><br> <div><div class='fb-like' data-href='https://sivsivsree.herokuapp.com/' data-layout='button_count' data-action='like' data-show-faces='true' data-share='true'></div></div><br><br><h4>I <a href='http://fb.me/sivsivsree' target='_blank'><big>Siv.S,</big></a> made this application using #Javascript, #Node.js and #Socket.io - hosted in herouku!</h4> <br><br> <small>by clicking <b>Let's Chat </b> button you are on your own! </small> <br></br> <div style='text-align:center;'><input type='text' placeholder='Enter a Nickname' id='nickname' autocomplete='off'> <button class='i-know' onClick='dismiss()'>Let's Chat</button></div> ";
 
       var div = $("<div>").attr("id","xky").css({"width": "100%", "height": "1000%", "z-index": 1000, "background": "rgba(221, 221, 221, 0.88)", "position":"absolute", "top":0, "left": 0});
       var modal = $("<div>").addClass("modal").html(html);
@@ -274,10 +274,13 @@
             if(color === ""){
               color = JSON.parse(localStorage.whoChat).color;
             }
-            var value = {color: color, msg: $('#m').val(), nickname: nickname};
+            var value = {color: color, msg: $('#m').val().trim(), nickname: nickname};
 
-          socket.emit('chat message', JSON.stringify(value));
-          $('#m').val('');
+            if($('#m').val().trim() != ""){
+              socket.emit('chat message', JSON.stringify(value));
+            }
+            
+            $('#m').val('').focus();
           return false;
         });
 
