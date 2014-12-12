@@ -189,6 +189,7 @@
         
 
         var color = "", id = false;
+
         if(localStorage){
            if(!localStorage.siv){
                showAbout();
@@ -229,10 +230,6 @@
           return false;
         });
 
-        $(window).unload(function(){
-           socket.emit("left", id);
-           socket.disconnect(id);
-        });
 
         socket.on('online', function(users){
           var online = "<li  class='online'><strong>"+users+" People Online</strong></li>";
@@ -241,7 +238,7 @@
 
         socket.on('chat message', function(data){
           data = JSON.parse(data);
-
+          console.log(data);
           var li = $("<li>").append($("<div>").attr({"class": "chat-bubble"}).css("color",data.color).text(data.msg));
           $('#messages').prepend(li);
           //li.css({"color": getRandomColor()});

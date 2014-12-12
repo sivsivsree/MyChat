@@ -2,7 +2,6 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var userCount = 0;
-var users = [];
 
 
 app.get('/', function(req, res){
@@ -17,16 +16,12 @@ app.get('/jq', function(req, res){
 io.on('connection', function(socket){
 
 
+      
+
   socket.on("join", function(id){
-    console.log(users.indexOf(id) );
-  	if(users.indexOf(id) == -1 && id !== false){
 
-  		userCount = users.push(id);
-	    io.emit('online', users.length  );
-	    console.log(users.length  + " person joined");
-	    console.log(users);
-
-  	}
+	   io.emit('online', io.sockets.sockets.length  );
+	   console.log(io.sockets.sockets.length + " CONNECTED USERS ");
 
   });
 
@@ -36,20 +31,10 @@ io.on('connection', function(socket){
   });
 
 
-  socket.on('left', function(id){
-	   var u = users.indexOf(id);
+  socket.on('disconnect', function(socket) {
 
-	   if(u != -1){
-	   	 users.splice(u, 1);
-	   	 io.emit('online', users.length );
-	   	 console.log(users.length +" people online");
-	   }
-  });
-
-
-  socket.on('disconnect', function(socket, info) {
-
-        console.log('disconnected');
+        io.emit('online', io.sockets.sockets.length  );
+	   console.log(io.sockets.sockets.length + " CONNECTED USERS REMAINING");
 
    })
 
