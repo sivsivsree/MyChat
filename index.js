@@ -18,7 +18,7 @@ io.on('connection', function(socket){
 
 
   socket.on("join", function(id){
-    console.log(users.indexOf(id));
+    console.log(users.indexOf(id) );
   	if(users.indexOf(id) == -1 && id !== false){
 
   		userCount = users.push(id);
@@ -44,8 +44,14 @@ io.on('connection', function(socket){
 	   	 io.emit('online', users.length );
 	   	 console.log(users.length +" people online");
 	   }
-	   
   });
+
+
+  socket.on('disconnect', function(socket, info) {
+
+        console.log('disconnected');
+
+   })
 
 });
 

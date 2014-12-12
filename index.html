@@ -212,7 +212,7 @@
            }
 
         }else{
-          document.body.innerHTML = "Use latest Browser! :(";
+          $('body').text("Use latest Browser! :(");
         }
 
         var max = ($(document).height() - 20);
@@ -231,6 +231,7 @@
 
         $(window).unload(function(){
            socket.emit("left", id);
+           socket.disconnect(id);
         });
 
         socket.on('online', function(users){
