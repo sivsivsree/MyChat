@@ -64,7 +64,7 @@
       }
 
       h1,.c{text-align: center;}
-      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages { list-style-type: none; margin: 0; padding: 0; margin-bottom: 50px;}
       #messages li { padding: 5px 10px; font-size: 1.5em; border-color: #fff; }
       .chat-bubble {
         display: inline-block;
@@ -266,7 +266,6 @@
 
         socket.on('chat message', function(data){
           data = JSON.parse(data);
-          console.log(data);
           var insideBubble = "<span style='color:"+data.color+"'><b>"+data.nickname+"</b>: " + htmlEntities(data.msg) + "</span>";
           var li = $("<li>").append($("<div>").attr({"class": "chat-bubble"}).append(insideBubble));
           $('#messages').prepend(li);
