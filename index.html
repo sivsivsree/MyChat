@@ -136,6 +136,7 @@
 
             <ul class="nav">
              <li>Online Status: <a id="online" >People Online</a></li>
+             <li>Settings: <a id="online" onclick="reset()">Change Chat Name</a></li>
            </ul>
 
        </div>
@@ -149,6 +150,7 @@
       <div id="userInput">
       <form action="" class="c">
         <input id="m" autocomplete="off" placeholder="Type and press Enter! Say Something to someone 3:)"/>
+
         <small> Developed With <span style="font-size:1.4em; color:rgba(253, 10, 10, 0.63)">♥</span> and care - <a href="http://fb.me/sivsivsree"></small><strong>Siv.S</strong></a>
       </form>
       </div>
@@ -230,6 +232,17 @@
 
 
      }
+
+     function reset(){
+       //localStorage.clear();
+       var html ="<h1>Are you sure?</h1><h2 class='c'>want to change ur chat name?</h2> <div style='text-align:center;'><button class='i-know' onClick='localStorage.clear(); window.location.reload();'>Yes</button><button class='i-know' style='background:orange' onClick='dismiss()'>Nope</button></div>";
+
+       var div = $("<div>").attr("id","xky").css({"width": "100%", "height": "1000%", "z-index": 1000, "background": "rgba(221, 221, 221, 0.88)", "position":"absolute", "top":0, "left": 0});
+      var modal = $("<div>").addClass("modal").html(html);
+      div.append(modal);
+      $("body").append(div);     
+     }
+
      function set(){
           color = getRandomColor();
           generator    = new IDGenerator();
