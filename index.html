@@ -215,11 +215,11 @@
           document.getElementById('newMsg').play();
           document.title  = data.msg + " - "+data.nickname+" || ♥ Siv S";
     }
-
+      var color = "", id = false;
       $(document).ready(function(){
         
 
-        var color = "", id = false;
+
 
         if(localStorage){
            if(!localStorage.siv || !localStorage.nickname){
@@ -269,6 +269,9 @@
               var nickname = localStorage.nickname;
             }else{
               showAbout();
+            }
+            if(color === ""){
+              color = JSON.parse(localStorage.whoChat).color;
             }
             var value = {color: color, msg: $('#m').val(), nickname: nickname};
 
