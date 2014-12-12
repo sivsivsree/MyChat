@@ -9,6 +9,7 @@
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box;  font-family: 'Roboto', sans-serif; font-weight: 300;}
       #container{max-width:800px; margin:auto auto;}
+      .container{width:80%; margin-left: auto; margin-right: auto}
       body { font-size: 14px; background: #eee; }
       form{
         width: 60%;
@@ -25,7 +26,7 @@
         }
 
         #container{max-width:100%; margin:auto auto; height:80vh;}
-
+        .container{width:100%;}
         .modal{
           width: 100%;
           margin: auto;
@@ -104,11 +105,44 @@
      .i-know:hover {
       background: rgba(67, 195, 211, 0.82);
      }
+     nav{
+      background: rgba(37, 152, 202, 0.7);
+     }
+
+     .nav{display: inline;}
+
+     .nav > li {
+      display: inline-block;
+     }
+     .nav li  a{
+        padding: 1em 1.2em;
+        display: inline-block;
+        cursor: pointer;
+      }
+      .nav li  a:hover{
+        background: rgba(225,225,225,.5);
+      }
+      .maR{
+        margin-right: 1em; 
+      }
     </style>
   </head>
   <body>
+     <nav>
+       <div class="container">
+           <ul class="nav maR">
+             <li><a href="/" style="font-weight: bold;letter-spacing: 10px;">whoChatz?</a></li>
+           </ul>
+
+            <ul class="nav">
+             <li>Online Status: <a id="online" >People Online</a></li>
+           </ul>
+
+       </div>
+     </nav>
+
     <div id="container">
-    <h1>?Who Chatz ☻ </h1>
+    
     <ul id="messages">
       <li class="online"><div class="fb-like" data-href="https://sivsivsree.herokuapp.com/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div></li>
     </ul>
@@ -286,8 +320,10 @@
 
 
         socket.on('online', function(users){
-          var online = "<li  class='online'><strong>"+users+" People Online</strong></li>";
-          $("#messages").prepend(online);
+          var status;
+          if(users == 1){ status =" You are alone! "} else {status = users +' People Online.';}
+
+          $("#online").text(status).hide().fadeIn();
         });
 
         socket.on('chat message', function(data){

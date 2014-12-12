@@ -2,10 +2,6 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-var databaseUrl = "mydb"; // "username:password@example.com/mydb"
-var collections = ["users", "reports"]
-
-var db = require("mongojs").connect(databaseUrl, collections);
 var userCount = 0;
 
 
